@@ -1,9 +1,9 @@
 ---
 id: EPIC-01
-title: "Master Data and Product Catalog"
+title: "Catálogo de Productos y Ubicaciones"
 state: active
 color: 1
-owner: product-owner
+owner: instructor
 ---
 
-Foundational entities: Products, SKUs, Categories, Units of Measure, and Warehouses/Locations.
+Entidades base para la práctica en Mendix: Producto, Categoría y Ubicaciones del almacén con páginas de mantenimiento CRUD.

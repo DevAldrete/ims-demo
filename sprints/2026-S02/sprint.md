@@ -1,14 +1,11 @@
 ---
 id: 2026-S02
-name: "Sprint 02 - Stock Operations and Receiving"
+name: "Sprint 02 - Movimientos de Stock y Dashboard"
 state: planned
-goal: "Implement real-time stock ledger, warehouse transfers, adjustments, and purchase order receiving workflows."
+goal: "Implementar la entidad StockMovement, microflows para calcular el stock actual y dashboard con alertas de stock mínimo."
 start: 2026-11-18
 end: 2026-12-02
-capacity: 32
+capacity: 12
 ---
 
-Notes, decisions, and the retrospective live here.
-
-At the end of the sprint, record what changed, what was learned, and what the
-next sprint should carry differently.
+Práctica intermedia enfocada en la lógica de negocio con Microflows, cálculo de inventario y diseño visual de Dashboard en Mendix.

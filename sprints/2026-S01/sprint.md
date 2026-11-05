@@ -1,14 +1,11 @@
 ---
 id: 2026-S01
-name: "Sprint 01 - Foundation and Master Data"
+name: "Sprint 01 - Modelo de Datos, Catálogo y Seguridad"
 state: active
-goal: "Establish Mendix core domain models, Product Catalog, Warehouse hierarchy, and Supplier management."
+goal: "Construir las entidades base (Producto, Categoría, Ubicación), páginas CRUD con Data Grid 2 y roles de usuario en Mendix."
 start: 2026-11-04
 end: 2026-11-18
-capacity: 30
+capacity: 12
 ---
 
-Notes, decisions, and the retrospective live here.
-
-At the end of the sprint, record what changed, what was learned, and what the
-next sprint should carry differently.
+Práctica inicial enfocada en el diseño del dominio, vistas de datos y perfiles de seguridad en Mendix Studio Pro.

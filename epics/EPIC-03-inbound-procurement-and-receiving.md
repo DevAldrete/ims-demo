@@ -1,9 +1,9 @@
 ---
 id: EPIC-03
-title: "Inbound Procurement and Receiving"
-state: planned
+title: "Dashboard y Control de Stock Mínimo"
+state: active
 color: 3
-owner: procurement-lead
+owner: instructor
 ---
 
-Purchase order lifecycle, goods receiving against POs, discrepancy logging, quality check quarantine, and warehouse putaway.
+Página principal de inicio con KPIs (total productos, stock bajo) y alertas visuales cuando el stock cae por debajo del mínimo.

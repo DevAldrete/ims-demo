@@ -1,9 +1,9 @@
 ---
 id: EPIC-02
-title: "Stock Ledger and Inventory Movements"
+title: "Movimientos de Inventario y Actualización de Stock"
 state: active
 color: 2
-owner: inventory-lead
+owner: instructor
 ---
 
-Real-time stock level tracking across locations, immutable stock transaction ledger, inter-warehouse transfers, and manual stock adjustments.
+Gestión de entradas, salidas y ajustes de stock utilizando microflows para calcular el stock actual en Mendix.

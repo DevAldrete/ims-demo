@@ -1,26 +1,28 @@
 ---
 id: IMS-8
-title: "Design immutable Inventory Transaction Ledger and Stock Level entities"
+title: "Crear Dashboard principal con KPIs y alertas de stock bajo"
 status: todo
 type: story
-epic: EPIC-02
+epic: EPIC-03
 sprint: 2026-S02
-points: 5
+points: 3
 priority: 1
-labels: [inventory, ledger]
-blocked_by: [IMS-1, IMS-2]
-order: 80
+labels: [dashboard, ui, kpis]
+blocked_by:
+  - IMS-2
+  - IMS-6
+order: 40
 created: 2026-11-04
-updated: 2026-11-04
+updated: 2026-11-05
 ---
 
 ## Context
 
-Create the double-entry style stock ledger to track inventory changes. Stock levels are calculated projections, while InventoryTransactions are immutable audit records.
+Diseñar la página de inicio que resume el estado del inventario para supervisores y operadores.
 
 ## Acceptance criteria
 
-- [ ] Entity `StockLevel` with QuantityOnHand, QuantityReserved, QuantityAvailable (calculated), QuantityInTransit, ReorderPoint, SafetyStock
-- [ ] Composite index on `StockLevel (Product_StockLevel, LocationBin_StockLevel)`
-- [ ] Entity `InventoryTransaction` with TransactionType (PurchaseReceipt, SalesFulfillment, TransferIn, TransferOut, AdjustmentPlus, AdjustmentMinus, CycleCountVariance), Quantity, UnitCost, Timestamp, ReferenceNumber
-- [ ] Sub-microflow `SUB_UpdateStockLevel` ensuring atomic transaction writes with database locking
+- [ ] Tarjeta KPI 1: Total de productos registrados en catálogo
+- [ ] Tarjeta KPI 2: Cantidad de productos con stock bajo (`CurrentStock <= MinimumStock`)
+- [ ] Data Grid en Dashboard mostrando productos críticos que requieren reorden urgente (resaltados con badge rojo)
+- [ ] Lista de los últimos 5 movimientos registrados recientemente

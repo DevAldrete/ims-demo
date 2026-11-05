@@ -1,26 +1,27 @@
 ---
 id: IMS-4
-title: "Build Product Catalog management UI with Data Grid 2 and filters"
+title: "Implementar microflow de validación de Producto (precio y SKU)"
 status: todo
 type: story
 epic: EPIC-01
 sprint: 2026-S01
-points: 5
-priority: 1
-labels: [catalog, ui]
-blocked_by: [IMS-1]
+points: 2
+priority: 2
+labels: [microflows, validation]
+blocked_by:
+  - IMS-1
 order: 40
 created: 2026-11-04
-updated: 2026-11-04
+updated: 2026-11-05
 ---
 
 ## Context
 
-Provide warehouse managers and catalog administrators an Atlas UI dashboard to search, filter, paginate, and edit products and their variants.
+Asegurar que los datos ingresados cumplan con las reglas de negocio antes de guardar un producto en la base de datos.
 
 ## Acceptance criteria
 
-- [ ] Data Grid 2 page with multi-column sorting, text search, category filtering, and status toggle
-- [ ] Product detail modal / page with category tree selector and unit of measure picker
-- [ ] Image upload and thumbnail display for each product
-- [ ] Quick-action buttons to duplicate product, view transaction history, or deactivate
+- [ ] Microflow `ACT_Product_Save` creado y asignado al botón 'Guardar' del formulario
+- [ ] Validación que el `SKU` y el `Name` no estén vacíos (mostrar mensaje de validación)
+- [ ] Validación de que `Price` sea mayor a 0 y `MinimumStock` sea mayor o igual a 0
+- [ ] Acción de commit y cierre de página si las validaciones son exitosas

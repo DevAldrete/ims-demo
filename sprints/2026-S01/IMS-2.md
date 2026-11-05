@@ -1,26 +1,27 @@
 ---
 id: IMS-2
-title: "Implement multi-tier Warehouse, Zone, and Bin location hierarchy"
+title: "Crear páginas de gestión CRUD con Data Grid 2"
 status: todo
 type: story
 epic: EPIC-01
 sprint: 2026-S01
-points: 5
+points: 3
 priority: 1
-labels: [domain-model, warehouse]
+labels: [ui, data-grid-2]
+blocked_by:
+  - IMS-1
 order: 20
 created: 2026-11-04
-updated: 2026-11-04
+updated: 2026-11-05
 ---
 
 ## Context
 
-Model physical storage locations in Mendix to support multi-site inventory tracking down to aisle, shelf, and bin levels.
+Permitir a los usuarios listar, buscar, crear, editar y eliminar productos y categorías desde la interfaz web de Mendix.
 
 ## Acceptance criteria
 
-- [ ] Entity `Warehouse` with Code, Name, Address, IsActive
-- [ ] Entity `Zone` associated with Warehouse (e.g. Cold Storage, Bulk, Picking)
-- [ ] Entity `LocationBin` associated with Zone with Aisle, Rack, Shelf, BinCode (unique per Warehouse)
-- [ ] Default staging and receiving bins designated per warehouse
-- [ ] Overview and detail editing pages with hierarchical tree or cascading dropdowns
+- [ ] Página `Product_Overview` con widget Data Grid 2 mostrando columnas clave (SKU, Nombre, Categoría, Precio, Stock)
+- [ ] Filtro de búsqueda por texto y selector desplegable de categoría en el Data Grid
+- [ ] Página modal `Product_NewEdit` para capturar o editar datos del producto
+- [ ] Página simple de mantenimiento para registrar Categorías y Ubicaciones
