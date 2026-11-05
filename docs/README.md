@@ -1,89 +1,59 @@
-# Inventory Management System (IMS) — Mendix Implementation Guide
+# Sistema de Gestión de Inventarios (IMS) — Guía Práctica en Mendix
 
-Welcome to the comprehensive implementation guide for building an enterprise-grade **Inventory Management System (IMS)** using **Mendix Studio Pro** (compatible with Mendix 10.x LTS).
+Bienvenido a la documentación práctica para construir una aplicación de **Gestión de Inventarios (Demo)** utilizando **Mendix Studio Pro**.
 
-This documentation provides end-to-end specifications, domain models, microflow architectures, UI/UX designs, security matrices, and integration blueprints aligned with our Scrumit project board.
+Este proyecto está diseñado especialmente como una **práctica guiada de aprendizaje** para comprender los pilares fundamentales de Mendix:
+1. **Modelado de Dominio (Domain Model):** Entidades, atributos, enumeraciones y asociaciones.
+2. **Lógica Visual (Microflows):** Validaciones, condicionales y actualización de stock.
+3. **Interfaz de Usuario (Atlas UI):** Data Grid 2, modales emergentes y tarjetas de KPIs.
+4. **Seguridad Básica (Project Security):** Roles de usuario y permisos de acceso.
 
 ---
 
-## 1. System Architecture Overview
+## 1. Arquitectura de la Solución Demo
 
-The system is designed as a modular low-code enterprise application adhering to clean separation of concerns:
+La aplicación se compone de un solo módulo principal (`InventoryManagement`) para mantener la simplicidad:
 
 ```mermaid
 flowchart TD
-    subgraph UI_Layer["UI & Experience Layer (Atlas UI / Responsive & Mobile)"]
-        DASH["Executive & Ops Dashboard"]
-        CATALOG_UI["Product & Bin Catalog"]
-        WH_OPS["Receiving & Putaway Station"]
-        PICK_PACK["Pick, Pack & Ship Workstation"]
-        AUDIT_UI["Blind Cycle Count Grid"]
-        SCANNER["Mobile Barcode / QR Scanner"]
+    subgraph UI["1. Interfaz de Usuario (Atlas UI)"]
+        DASH["Dashboard de Inicio (KPIs y Alertas)"]
+        PROD_PAGE["Catálogo de Productos (Data Grid 2)"]
+        MOV_PAGE["Registro de Entradas y Salidas (Modal)"]
     end
 
-    subgraph Business_Layer["Business Logic & Microflows"]
-        LEDGER_ENG["Double-Entry Stock Ledger Engine"]
-        RES_ENG["FIFO Stock Reservation Engine"]
-        PROC_ENG["Procurement & Receiving Workflow"]
-        COUNT_ENG["Cycle Count Variance Calculator"]
-        ALERT_ENG["Automated Reorder Point (ROP) Job"]
+    subgraph Logic["2. Lógica de Negocio (Microflows)"]
+        VAL_MF["ACT_Product_Save (Validar campos)"]
+        MOV_MF["ACT_StockMovement_Process (Actualizar Stock)"]
     end
 
-    subgraph Data_Layer["Domain Model & Data Layer (PostgreSQL / SQL Server)"]
-        MD_ENTITIES["Master Data (Products, Warehouses, Bins, Suppliers)"]
-        STOCK_ENTITIES["StockLevel & InventoryTransaction"]
-        ORDER_ENTITIES["PurchaseOrder & SalesOrder"]
-        AUDIT_ENTITIES["CycleCount & Discrepancies"]
+    subgraph Data["3. Modelo de Datos (Base de Datos)"]
+        PROD[("Product")]
+        CAT[("Category")]
+        LOC[("Location")]
+        MOV[("StockMovement")]
     end
 
-    subgraph Integration_Layer["External Systems & APIs"]
-        REST_API["Published REST Services (OpenAPI 3.0)"]
-        EXCEL_IO["Excel Importer / Exporter Modules"]
-        WEBHOOKS["Asynchronous Webhook Event Dispatcher"]
-    end
-
-    UI_Layer --> Business_Layer
-    Business_Layer --> Data_Layer
-    Integration_Layer <--> Business_Layer
+    UI --> Logic
+    Logic --> Data
 ```
 
 ---
 
-## 2. Modular Structure in Mendix Studio Pro
+## 2. Índice de Documentación
 
-To ensure high maintainability and prevent circular dependencies, organize the project into focused Mendix modules:
+Explora cada sección para construir la aplicación paso a paso:
 
-| Module Name | Purpose & Scope | Key Dependencies |
-| :--- | :--- | :--- |
-| **`MasterData`** | Products, Categories, Units of Measure (UoM), Warehouses, Zones, Bins, Suppliers | None (Core Base) |
-| **`Inventory`** | Stock levels, location quantities, immutable transaction ledger, adjustments, inter-warehouse transfers | `MasterData` |
-| **`Procurement`** | Purchase orders, vendor lead times, goods receiving, putaway routing, quality inspection/quarantine | `MasterData`, `Inventory` |
-| **`Fulfillment`** | Sales order reservations, picking waves, packing verification, shipping dispatch, packing slip generation | `MasterData`, `Inventory` |
-| **`InventoryAudit`**| Cycle count planning, blind physical count entry, variance reconciliation, ABC analysis | `MasterData`, `Inventory` |
-| **`Notifications`** | Reorder threshold monitoring, scheduled jobs, in-app alert center, email dispatches | `Inventory`, `Procurement` |
-| **`IMS_Integration`**| Published REST endpoints, webhook dispatcher, Excel batch import/export templates | All operational modules |
-| **`IMS_UI`** | Layouts, dashboard widgets, responsive navigation profiles, barcode scanner components | All modules |
+1. [**Guía Tutorial Paso a Paso**](guia-paso-a-paso-mendix.md) — Instrucciones detalladas desde la creación del proyecto hasta ejecutar la app localmente.
+2. [**Modelo de Datos Simplificado**](modelo-de-datos.md) — Las 4 entidades clave, atributos, tipos de datos y relaciones.
+3. [**Lógica y Microflows**](logica-y-microflows.md) — Flujos visuales para validación de datos y actualización de existencias (+ entradas / - salidas).
+4. [**Diseño de Páginas y UI**](interfaz-y-paginas.md) — Configuración del Dashboard con KPIs y catálogo con Data Grid 2.
+5. [**Seguridad y Roles**](seguridad-y-roles.md) — Configuración de perfiles `Administrator` y `WarehouseOperator`.
 
 ---
 
-## 3. Documentation Index
+## 3. Plan de Sprints de la Práctica (Scrumit)
 
-Detailed implementation chapters:
-
-1. [**Domain Model & Entities**](domain-model.md) — Comprehensive entity definitions, attribute types, associations, unique constraints, and database indexes.
-2. [**Security & User Access Control**](security-and-roles.md) — Role-based access control (RBAC), module roles, entity access rules, and XPath constraints.
-3. [**Business Logic & Microflows**](business-logic-microflows.md) — Detailed microflow & nanoflow specifications, transactional safety, stock calculation algorithms, and scheduled events.
-4. [**UI & UX Design**](ui-and-ux-design.md) — Atlas UI layout templates, Data Grid 2 configuration, mobile scanner integration, and responsive patterns.
-5. [**Integrations & REST APIs**](integrations-and-apis.md) — Published REST service specifications, Swagger definitions, Excel batch migrations, and webhooks.
-6. [**Deployment & Best Practices**](deployment-and-best-practices.md) — Performance optimizations, caching, UnitTesting framework, and CI/CD pipelines.
-
----
-
-## 4. Scrumit Project Roadmap Alignment
-
-The development lifecycle is tracked in our Git repository using `scrumit`:
-
-- **Sprint 01 (`2026-S01`)**: Foundation & Master Data (Products, Warehouses, Suppliers, RBAC, Excel Import, Testing)
-- **Sprint 02 (`2026-S02`)**: Stock Operations & Inbound Receiving (Transaction Ledger, Stock Transfers, Adjustments, Purchase Orders, Goods Receipt)
-- **Sprint 03 (`2026-S03`)**: Fulfillment, Auditing & Integrations (Order Reservation, Pick/Pack/Ship, Cycle Counts, Reorder Alerts, Mobile Scanner, REST API)
-- **Backlog**: Lot/Batch Expiration, Serialized Tracking, ABC Velocity Stratification, Executive Valuation Analytics, Webhooks
+- **[Sprint 01 (`2026-S01`)](file:///Users/neurd/dev/ims/sprints/2026-S01/sprint.md)**: Modelo de Datos, Catálogo de Productos y Seguridad (`IMS-1` al `IMS-4`).
+- **[Sprint 02 (`2026-S02`)](file:///Users/neurd/dev/ims/sprints/2026-S02/sprint.md)**: Movimientos de Stock (+/-), Alertas de Stock Bajo y Dashboard (`IMS-5` al `IMS-8`).
+- **[Backlog Opcional](file:///Users/neurd/dev/ims/backlog/)**: Importación Excel y lector de código de barras (`IMS-9` e `IMS-10`).
